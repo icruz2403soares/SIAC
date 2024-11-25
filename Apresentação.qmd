@@ -1,0 +1,122 @@
+---
+format: 
+
+    revealjs:
+
+        embed-resources: true
+---
+
+```{r, echo = FALSE}
+
+library(dplyr, warn.conflicts = FALSE)
+library(knitr, warn.conflicts = FALSE)
+library(ggplot2, warn.conflicts = FALSE)
+library(gridExtra, warn.conflicts = FALSE)
+library(plotly, warn.conflicts = FALSE)
+
+```
+
+## Dados Simulados
+
+```{r, echo = FALSE}
+
+grid.arrange(
+    
+    readRDS('Teste\\Gráficos\\Primeiro.RDS'),
+
+    readRDS('Teste\\Gráficos\\Segundo.RDS'),
+
+    readRDS('Teste\\Gráficos\\Terceiro.RDS'),
+    
+    ncol = 3
+
+)
+
+
+```
+
+## Curva ROC - SMOTE
+
+```{r, echo = FALSE}
+
+grid.arrange(
+    
+    readRDS('Teste\\Curva ROC\\SMOTE_P.RDS'),
+
+    readRDS('Teste\\Curva ROC\\SMOTE_S.RDS'),
+
+    readRDS('Teste\\Curva ROC\\SMOTE_T.RDS'),
+    
+    ncol = 3
+
+)
+
+```
+
+## Curva ROC - BorderlineSMOTE
+
+```{r, echo = FALSE}
+
+grid.arrange(
+    
+    readRDS('Teste\\Curva ROC\\BSMOTE_P.RDS'),
+
+    readRDS('Teste\\Curva ROC\\BSMOTE_S.RDS'),
+
+    readRDS('Teste\\Curva ROC\\BSMOTE_T.RDS'),
+    
+    ncol = 3
+
+)
+
+```
+
+## Curva ROC - ADASYN
+
+```{r, echo = FALSE}
+
+grid.arrange(
+
+    readRDS('Teste\\Curva ROC\\ADASYN_P.RDS'),
+
+    readRDS('Teste\\Curva ROC\\ADASYN_S.RDS'),
+
+    readRDS('Teste\\Curva ROC\\ADASYN_T.RDS'),
+    
+    ncol = 3
+
+)
+
+```
+
+## Sensibilidade
+
+```{r, echo = FALSE}
+
+read.csv2('Teste\\Tabelas\\Sensibilidade_P.csv') %>%
+
+    merge(read.csv2('Teste\\Tabelas\\Sensibilidade_S.csv'), by = 'Estimador') %>%
+
+    merge(read.csv2('Teste\\Tabelas\\Sensibilidade_T.csv'), by = 'Estimador') %>%
+
+    arrange(desc(.estimate.x), desc(.estimate.y), desc(.estimate)) %>%
+
+    kable(col.names = c('Estimador', 'Nível de raridade = 0.2', 'Nível de raridade = 0.1', 'Nível de raridade = 0.05'))
+
+```
+
+## Especificidade
+
+```{r, echo = FALSE}
+
+read.csv2('Teste\\Tabelas\\Especificidade_P.csv') %>%
+
+    merge(read.csv2('Teste\\Tabelas\\Especificidade_S.csv'), by = 'Estimador') %>%
+
+    merge(read.csv2('Teste\\Tabelas\\Especificidade_T.csv'), by = 'Estimador') %>%
+
+    arrange(desc(.estimate.x), desc(.estimate.y), desc(.estimate)) %>%
+
+    kable(col.names = c('Estimador', 'Nível de raridade = 0.2', 'Nível de raridade = 0.1', 'Nível de raridade = 0.05'))
+
+```

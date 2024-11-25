@@ -1,0 +1,5 @@
+"Estimador";".estimate"
+"Padrão";0,9625
+"SMOTE";0,9175
+"BorderlineSMOTE";0,9375
+"ADASYN";0,8575
